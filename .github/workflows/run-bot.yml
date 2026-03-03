@@ -31,10 +31,8 @@ jobs:
       - name: 📦 Menginstal Dependencies & Browser
         run: |
           pip install -r requirements.txt
-          sudo apt-get update
-          sudo apt-get install -y libwoff1 libvpx7 libevent-2.1-7 libopus0
-          playwright install chromium
-          playwright install-deps
+          npx -y playwright@1.42.0 install-deps
+          npx -y playwright@1.42.0 install chromium
 
       - name: ⚙️ Memodifikasi config.json dengan Input
         shell: python

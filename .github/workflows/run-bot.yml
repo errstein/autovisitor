@@ -1,0 +1,50 @@
+name: 🚀 Jalankan Bot Pengukuran Web
+
+on:
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: 'Keyword Pencarian di Google'
+        required: true
+        default: 'Infrastruktur Web Indonesia'
+      target_domain:
+        description: 'Domain Tujuan (misal: detik.com)'
+        required: true
+        default: 'detik.com'
+      max_visitors:
+        description: 'Jumlah Visitor / Tab Browser'
+        required: true
+        default: '3'
+
+jobs:
+  jalankan-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Mengambil Kode dari Repositori
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Instalasi Library & Browser
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps
+
+      - name: ⚙️ Update config.json dengan Input Anda
+        shell: python
+        run: |
+          import json
+          with open('config.json', 'r') as f:
+              data = json.load(f)
+          data['keyword'] = "${{ github.event.inputs.keyword }}"
+          data['target_domain'] = "${{ github.event.inputs.target_domain }}"
+          data['max_visitors'] = int("${{ github.event.inputs.max_visitors }}")
+          with open('config.json', 'w') as f:
+              json.dump(data, f, indent=4)
+
+      - name: 🤖 Mulai Menjalankan Bot
+        run: python runner.py

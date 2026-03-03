@@ -38,7 +38,16 @@ def run_bot(proxy_url):
             
             # 2. Cari Keyword
             search_box = page.wait_for_selector('textarea[name="q"], input[name="q"]', timeout=15000)
-            search_box.fill(config['keyword'])
+            
+            # Memilih satu keyword secara acak jika bentuknya adalah list (banyak keyword)
+            if isinstance(config['keyword'], list):
+                target_keyword = random.choice(config['keyword'])
+            else:
+                target_keyword = config['keyword']
+                
+            print(f"[*] Proxy {proxy_url} menggunakan keyword: {target_keyword}")
+            
+            search_box.fill(target_keyword)
             search_box.press("Enter")
             page.wait_for_load_state("networkidle")
 

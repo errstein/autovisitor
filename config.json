@@ -1,0 +1,11 @@
+{
+    "keyword": "Infrastruktur Web Indonesia",
+    "target_domain": "detik.com",
+    "search_engine": "google.co.id",
+    "language": "id-ID",
+    "platform": "desktop",
+    "min_delay_main": 15,
+    "max_delay_main": 30,
+    "subpage_duration": 25,
+    "max_visitors": 10
+}

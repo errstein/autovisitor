@@ -34,15 +34,20 @@ jobs:
           playwright install chromium
           playwright install-deps
 
-      - name: ⚙️ Update config.json dengan Input Anda
+      - name: ⚙️ Memodifikasi config.json dengan Input
         shell: python
         run: |
           import json
           with open('config.json', 'r') as f:
               data = json.load(f)
-          data['keyword'] = "${{ github.event.inputs.keyword }}"
+          
+          # Menerima banyak keyword dan memisahkannya berdasarkan tanda koma
+          raw_keywords = "${{ github.event.inputs.keyword }}"
+          data['keyword'] = [k.strip() for k in raw_keywords.split(',') if k.strip()]
+          
           data['target_domain'] = "${{ github.event.inputs.target_domain }}"
           data['max_visitors'] = int("${{ github.event.inputs.max_visitors }}")
+          
           with open('config.json', 'w') as f:
               json.dump(data, f, indent=4)
 

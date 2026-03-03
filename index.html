@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastruktur Pengujian CTR & Metrik Web</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; background-color: #f9f9f9;}
+        .container { background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; font-family: monospace; color: #e74c3c;}
+        pre { background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .warning { background-color: #fff3cd; color: #856404; padding: 15px; border-left: 5px solid #ffeeba; margin: 20px 0;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ Automasi Metrik Web & Bot CTR</h1>
+        <p>Infrastruktur ini dirancang untuk mensimulasikan trafik secara organik dari Search Engine (Google) menuju target URL dengan menggunakan kontrol parameter secara penuh.</p>
+
+        <div class="warning">
+            <strong>Catatan Penggunaan:</strong> Gunakan proxy residensial premium. Menggunakan proxy gratis/publik akan sering menyebabkan kegagalan koneksi atau deteksi anti-bot dari Google.
+        </div>
+
+        <h2>Fitur Utama</h2>
+        <ul>
+            <li><strong>Stealth Mode:</strong> Memanipulasi sidik jari browser menggunakan <code>playwright-stealth</code>.</li>
+            <li><strong>Anti-Bounce Rate:</strong> Skrip akan menelusuri halaman utama dan otomatis mencari link internal untuk diklik menuju sub-page.</li>
+            <li><strong>Rotasi Perangkat:</strong> Automasi <i>User Agent</i> (Mobile/Desktop) & Viewport.</li>
+            <li><strong>Auto Proxy Checker:</strong> Menyaring <i>dead proxy</i> sebelum bot memakan memori sistem.</li>
+        </ul>
+
+        <h2>Cara Menjalankan</h2>
+        <p>1. Instal semua library yang dibutuhkan:</p>
+        <pre><code>pip install -r requirements.txt
+playwright install chromium</code></pre>
+        
+        <p>2. Atur parameter di <code>config.json</code> dan masukkan IP di <code>proxies.txt</code>.</p>
+        
+        <p>3. Eksekusi manajer sistem:</p>
+        <pre><code>python runner.py</code></pre>
+
+    </div>
+</body>
+</html>
